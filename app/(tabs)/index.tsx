@@ -1,82 +1,61 @@
-import { Image, Platform, StyleSheet } from "react-native";
+import Place from "@/components/leaderboard/Place";
+import { StyleSheet, View } from "react-native";
+import { useSharedValue } from "react-native-reanimated";
 
-import { HelloWave } from "@/components/HelloWave";
-import ParallaxScrollView from "@/components/ParallaxScrollView";
-import { ThemedText } from "@/components/ThemedText";
-import { ThemedView } from "@/components/ThemedView";
-import { Link } from "expo-router";
+export interface User {
+  name: string;
+  score: number;
+}
 
-export default function HomeScreen() {
+const users: User[] = [
+  { name: "John", score: 32 },
+  { name: "Lennon", score: 23 },
+  { name: "Paul", score: 48 },
+  { name: "George", score: 54 },
+  { name: "Ringo", score: 5 },
+  { name: "Michael", score: 40 },
+];
+
+export default function LeaderBoard() {
+  const _spacing = 4;
+  const _animated = useSharedValue(0);
+  const usersByScore = users.sort((a, b) => a.score - b.score);
   return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: "#A1CEDC", dark: "#1D3D47" }}
-      headerImage={
-        <Image
-          source={require("@/assets/images/partial-react-logo.png")}
-          style={styles.reactLogo}
-        />
-      }
-    >
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Welcome!</ThemedText>
-        <HelloWave />
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 1: Try it</ThemedText>
-        <ThemedText>
-          Edit{" "}
-          <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText>{" "}
-          to see changes. Press{" "}
-          <ThemedText type="defaultSemiBold">
-            {Platform.select({ ios: "cmd + d", android: "cmd + m" })}
-          </ThemedText>{" "}
-          to open developer tools.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 2: Explore</ThemedText>
-        <ThemedText>
-          Tap the Explore tab to learn more about what's included in this
-          starter app.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 3: Get a fresh start</ThemedText>
-        <ThemedText>
-          When you're ready, run{" "}
-          <ThemedText type="defaultSemiBold">npm run reset-project</ThemedText>{" "}
-          to get a fresh <ThemedText type="defaultSemiBold">app</ThemedText>{" "}
-          directory. This will move the current{" "}
-          <ThemedText type="defaultSemiBold">app</ThemedText> to{" "}
-          <ThemedText type="defaultSemiBold">app-example</ThemedText>.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <Link href={{ pathname: "/leaderboard" }}>
-          <ThemedText type="subtitle">
-            Click here to see a Leaderboard animation
-          </ThemedText>
-        </Link>
-      </ThemedView>
-    </ParallaxScrollView>
+    <View style={styles.screen}>
+      <View
+        style={{
+          flexDirection: "row",
+          gap: _spacing,
+          justifyContent: "flex-end",
+          alignItems: "flex-end",
+          height: 200,
+        }}
+      >
+        {usersByScore.map((user, i) => (
+          <Place
+            contestants={usersByScore.length}
+            key={i}
+            user={user}
+            index={i}
+            anim={_animated}
+            onFinish={
+              i === users.length - 1
+                ? () => {
+                    _animated.value = 1;
+                  }
+                : () => null
+            }
+          />
+        ))}
+      </View>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
-  titleContainer: {
-    flexDirection: "row",
+  screen: {
+    flex: 1,
+    justifyContent: "center",
     alignItems: "center",
-    gap: 8,
-  },
-  stepContainer: {
-    gap: 8,
-    marginBottom: 8,
-  },
-  reactLogo: {
-    height: 178,
-    width: 290,
-    bottom: 0,
-    left: 0,
-    position: "absolute",
   },
 });
