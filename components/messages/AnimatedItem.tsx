@@ -1,5 +1,11 @@
+import { MAX_MESSAGES } from "@/mocks/chat";
 import React from "react";
-import { View } from "react-native";
+import Animated, {
+    interpolate,
+    useAnimatedStyle,
+    useDerivedValue,
+    withSpring,
+} from "react-native-reanimated";
 
 type AnimatedItemProps = {
   index: number;
@@ -7,5 +13,13 @@ type AnimatedItemProps = {
 };
 
 export default function AnimatedItem({ index, children }: AnimatedItemProps) {
-  return <View>{children}</View>;
+  const newIndex = useDerivedValue(() => {
+    return withSpring(index, { damping: 80, stiffness: 200 });
+  });
+  const animStyles = useAnimatedStyle(() => {
+    return {
+      opacity: interpolate(newIndex.value, [0, 1], [1, 1 - 1 / MAX_MESSAGES]),
+    };
+  });
+  return <Animated.View style={[animStyles]}>{children}</Animated.View>;
 }

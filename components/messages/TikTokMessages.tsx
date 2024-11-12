@@ -11,6 +11,7 @@ export default function TikTokMessages<T>({
   return (
     <FlatList
       {...rest}
+      inverted
       renderItem={(itemProps) => {
         return (
           <AnimatedItem index={itemProps.index}>
