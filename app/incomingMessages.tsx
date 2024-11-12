@@ -1,8 +1,10 @@
-import TikTokMessages from "@/components/messages/TikTokMessages";
+import Messages from "@/components/messages/Messages";
+import { ThemedText } from "@/components/ThemedText";
 import { ChatItem, generateNewMessage } from "@/mocks/chat";
 import SegmentedControl from "@react-native-segmented-control/segmented-control";
+import { Link } from "expo-router";
 import { useEffect, useRef, useState } from "react";
-import { Image, Text, View } from "react-native";
+import { Image, Text, TouchableOpacity, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 const chatSpeed = {
@@ -39,7 +41,7 @@ export default function IncomingMessages() {
 
   return (
     <View style={{ flex: 1, paddingTop: top }}>
-      <TikTokMessages
+      <Messages
         contentContainerStyle={{ padding: 16, paddingBottom: bottom + 16 }}
         data={messages}
         renderItem={({ item }) => {
@@ -83,7 +85,7 @@ export default function IncomingMessages() {
       />
       <View
         style={{
-          height: 100,
+          height: 160,
           justifyContent: "center",
           alignItems: "center",
           paddingBottom: bottom,
@@ -97,6 +99,11 @@ export default function IncomingMessages() {
             setSpeed(event.nativeEvent.value as keyof typeof chatSpeed);
           }}
         />
+        <Link asChild href={{pathname: '/'}}>
+        <TouchableOpacity style={{paddingTop: 16}}>
+            <ThemedText>Go back</ThemedText>
+        </TouchableOpacity>
+        </Link>
       </View>
     </View>
   );

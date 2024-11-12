@@ -1,6 +1,7 @@
 import { MAX_MESSAGES } from "@/mocks/chat";
 import React from "react";
 import Animated, {
+    FadeInDown,
     interpolate,
     useAnimatedStyle,
     useDerivedValue,
@@ -21,5 +22,21 @@ export default function AnimatedItem({ index, children }: AnimatedItemProps) {
       opacity: interpolate(newIndex.value, [0, 1], [1, 1 - 1 / MAX_MESSAGES]),
     };
   });
-  return <Animated.View style={[animStyles]}>{children}</Animated.View>;
+  return (
+    <Animated.View
+      entering={FadeInDown.springify()
+        .damping(80)
+        .stiffness(200)
+        .withInitialValues({
+          opacity: 0,
+          transform: [
+            {
+              translateY: 100,
+            },
+          ],
+        })}
+    >
+      <Animated.View style={[animStyles]}>{children}</Animated.View>
+    </Animated.View>
+  );
 }
