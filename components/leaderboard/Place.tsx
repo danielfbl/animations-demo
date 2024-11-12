@@ -1,15 +1,16 @@
-import { User } from "@/app/(tabs)";
+
+import { User } from "@/app/leaderboard";
 import { Image, View } from "react-native";
 import Animated, {
-    FadeInRight,
-    interpolate,
-    interpolateColor,
-    runOnJS,
-    SharedValue,
-    useAnimatedStyle,
-    useDerivedValue,
-    withDelay,
-    withSpring,
+  FadeInRight,
+  interpolate,
+  interpolateColor,
+  runOnJS,
+  SharedValue,
+  useAnimatedStyle,
+  useDerivedValue,
+  withDelay,
+  withSpring,
 } from "react-native-reanimated";
 
 type PlaceProps = {
@@ -28,7 +29,7 @@ export default function Place({
   onFinish,
 }: PlaceProps) {
   const _avatarSize = 28;
-  const _staggerDuration = 100;
+  const _staggerDuration = 200;
   const _spacing = 4;
 
   const _anim = useDerivedValue(() => {
@@ -50,7 +51,7 @@ export default function Place({
         index === contestants - 1
           ? interpolateColor(
               _anim.value,
-              [0, 1],
+              [0.5, 1],
               ["rgba(0,0,0,0.1)", "turquoise"]
             )
           : "rgba(0,0,0,0.1)",
