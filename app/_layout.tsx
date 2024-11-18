@@ -41,6 +41,10 @@ export default function RootLayout() {
             name="incomingMessages"
             options={{ headerShown: false }}
           />
+          <Stack.Screen
+            name="counter"
+            options={{ headerShown: false }}
+          />
           <Stack.Screen name="+not-found" />
         </Stack>
       </SafeAreaProvider>

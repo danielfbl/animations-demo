@@ -2,7 +2,7 @@ import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
 import { Link } from "expo-router";
 import { TouchableOpacity } from "react-native";
-import Animated, { FadeInUp, SlideInRight } from "react-native-reanimated";
+import Animated, { FadeInUp, SlideInDown, SlideInRight } from "react-native-reanimated";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 export default function Home() {
@@ -33,6 +33,15 @@ export default function Home() {
         <Link asChild href={{ pathname: "/incomingMessages" }}>
           <TouchableOpacity>
             <ThemedText>Incoming Messages Animation</ThemedText>
+          </TouchableOpacity>
+        </Link>
+      </Animated.View>
+      <Animated.View
+        entering={SlideInDown.delay(1200).springify().damping(80).stiffness(200)}
+      >
+        <Link asChild href={{ pathname: "/counter" }}>
+          <TouchableOpacity>
+            <ThemedText>Counter Animation with Moti</ThemedText>
           </TouchableOpacity>
         </Link>
       </Animated.View>
