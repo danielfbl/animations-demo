@@ -37,14 +37,12 @@ export default function RootLayout() {
         <Stack>
           <Stack.Screen name="index" options={{ headerShown: false }} />
           <Stack.Screen name="leaderboard" options={{ headerShown: false }} />
+          <Stack.Screen name="animatedTabs" options={{ headerShown: false }} />
           <Stack.Screen
             name="incomingMessages"
             options={{ headerShown: false }}
           />
-          <Stack.Screen
-            name="counter"
-            options={{ headerShown: false }}
-          />
+          <Stack.Screen name="counter" options={{ headerShown: false }} />
           <Stack.Screen name="+not-found" />
         </Stack>
       </SafeAreaProvider>

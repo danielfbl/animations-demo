@@ -2,7 +2,7 @@ import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
 import { Link } from "expo-router";
 import { TouchableOpacity } from "react-native";
-import Animated, { FadeInUp, SlideInDown, SlideInRight } from "react-native-reanimated";
+import Animated, { SlideInDown, SlideInLeft, SlideInRight, SlideInUp } from "react-native-reanimated";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 export default function Home() {
@@ -19,7 +19,7 @@ export default function Home() {
       <ThemedText type="title">Animations</ThemedText>
       <Animated.View
         style={{ paddingTop: 24 }}
-        entering={FadeInUp.delay(500).springify().damping(80).stiffness(200)}
+        entering={SlideInUp.delay(500).springify().damping(80).stiffness(200)}
       >
         <Link asChild href={{ pathname: "/leaderboard" }}>
           <TouchableOpacity>
@@ -28,7 +28,7 @@ export default function Home() {
         </Link>
       </Animated.View>
       <Animated.View
-        entering={SlideInRight.delay(900).springify().damping(80).stiffness(200)}
+        entering={SlideInRight.delay(800).springify().damping(80).stiffness(200)}
       >
         <Link asChild href={{ pathname: "/incomingMessages" }}>
           <TouchableOpacity>
@@ -37,11 +37,20 @@ export default function Home() {
         </Link>
       </Animated.View>
       <Animated.View
-        entering={SlideInDown.delay(1200).springify().damping(80).stiffness(200)}
+        entering={SlideInLeft.delay(1100).springify().damping(80).stiffness(200)}
       >
         <Link asChild href={{ pathname: "/counter" }}>
           <TouchableOpacity>
             <ThemedText>Counter Animation with Moti</ThemedText>
+          </TouchableOpacity>
+        </Link>
+      </Animated.View>
+      <Animated.View
+        entering={SlideInDown.delay(1400).springify().damping(80).stiffness(200)}
+      >
+        <Link asChild href={{pathname: "/animatedTabs"}}>
+          <TouchableOpacity>
+            <ThemedText>Animated Tabs</ThemedText>
           </TouchableOpacity>
         </Link>
       </Animated.View>
