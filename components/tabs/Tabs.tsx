@@ -1,7 +1,15 @@
+import { tabColors } from "@/constants/Colors";
 import { icons } from "lucide-react-native";
+import { MotiView } from "moti";
 import { Pressable, View } from "react-native";
-import Animated, { FadeInRight } from "react-native-reanimated";
+import Animated, {
+    FadeInRight,
+    FadeOutRight,
+    LayoutAnimationConfig,
+    LinearTransition,
+} from "react-native-reanimated";
 import Icon from "./Icon";
+
 
 export type IconNames = keyof typeof icons;
 
@@ -32,11 +40,23 @@ export default function Tabs({
   inactiveBGColor = "#ddd",
 }: TabsProps) {
   return (
-    <View style={{ flexDirection: "row", gap: _spacing }}>
+    <View
+      style={{ flexDirection: "row", gap: _spacing, paddingHorizontal: 12 }}
+    >
       {data.map((item, index) => {
         const isSelected = selectedIndex === index;
         return (
-          <View key={`${item.label}-${index}`}>
+          <MotiView
+            key={`${item.label}-${index}`}
+            layout={LinearTransition.springify().damping(80).stiffness(200)}
+            animate={{
+              backgroundColor: isSelected
+                ? tabColors[selectedIndex]
+                : inactiveBGColor,
+              borderRadius: 8,
+              overflow: "hidden",
+            }}
+          >
             <Pressable
               onPress={() => onChange(index)}
               style={{
@@ -45,23 +65,33 @@ export default function Tabs({
                 justifyContent: "center",
                 alignItems: "center",
                 gap: _spacing,
-                backgroundColor: isSelected ? activeBGColor : inactiveBGColor,
-                borderRadius: 8,
               }}
             >
-              <Icon name={item.icon} />
-              {isSelected ? (
-                <Animated.Text
-                entering={FadeInRight.springify().damping(80).stiffness(200)}
-                  style={{
-                    color: isSelected ? activeColor : inactiveColor,
-                  }}
-                >
-                  {item.label}
-                </Animated.Text>
-              ) : null}
+              <Icon
+                name={item.icon}
+                animate={{
+                  color: isSelected ? activeColor : inactiveColor,
+                }}
+              />
+              <LayoutAnimationConfig skipEntering>
+                {isSelected ? (
+                  <Animated.Text
+                    entering={FadeInRight.springify()
+                      .damping(80)
+                      .stiffness(200)}
+                    style={{
+                      color: isSelected ? activeColor : inactiveColor,
+                    }}
+                    exiting={FadeOutRight.springify()
+                      .damping(80)
+                      .stiffness(200)}
+                  >
+                    {item.label}
+                  </Animated.Text>
+                ) : null}
+              </LayoutAnimationConfig>
             </Pressable>
-          </View>
+          </MotiView>
         );
       })}
     </View>
