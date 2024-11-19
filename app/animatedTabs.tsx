@@ -1,8 +1,10 @@
 import Tabs from "@/components/tabs/Tabs";
+import { ThemedText } from "@/components/ThemedText";
 import { tabColors } from "@/constants/Colors";
+import { Link } from "expo-router";
 import { MotiView } from "moti";
 import { useState } from "react";
-import { SafeAreaView, StyleSheet } from "react-native";
+import { SafeAreaView, StyleSheet, TouchableOpacity, View } from "react-native";
 import {
   FadeInRight,
   FadeOutLeft,
@@ -42,6 +44,13 @@ export default function AnimatedTabs() {
           exiting={FadeOutLeft.springify().damping(80).stiffness(200)}
         />
       </LayoutAnimationConfig>
+      <View style={{ justifyContent: "center", alignItems: "center" }}>
+        <Link asChild href={{ pathname: "/" }}>
+          <TouchableOpacity style={{ paddingTop: 48 }}>
+            <ThemedText>Go back</ThemedText>
+          </TouchableOpacity>
+        </Link>
+      </View>
     </SafeAreaView>
   );
 }
