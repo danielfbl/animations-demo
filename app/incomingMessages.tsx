@@ -1,10 +1,9 @@
+import GoBackButton from "@/components/GoBackButton";
 import Messages from "@/components/messages/Messages";
-import { ThemedText } from "@/components/ThemedText";
 import { ChatItem, generateNewMessage } from "@/mocks/chat";
 import SegmentedControl from "@react-native-segmented-control/segmented-control";
-import { Link } from "expo-router";
 import { useEffect, useRef, useState } from "react";
-import { Image, Text, TouchableOpacity, View } from "react-native";
+import { Image, Text, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 const chatSpeed = {
@@ -15,9 +14,7 @@ const chatSpeed = {
 };
 
 export default function IncomingMessages() {
-  const [messages, setMessages] = useState<ChatItem[]>(
-   []
-  );
+  const [messages, setMessages] = useState<ChatItem[]>([]);
 
   const timeOut = useRef<NodeJS.Timeout | null>(null);
   const [speed, setSpeed] = useState<keyof typeof chatSpeed>("slow");
@@ -26,18 +23,18 @@ export default function IncomingMessages() {
   const generateNewData = () => {
     clearTimeout(timeOut.current || undefined);
     const selectedSpeed = chatSpeed[speed];
-    const timer = Math.random() * selectedSpeed[0] + selectedSpeed[1]
+    const timer = Math.random() * selectedSpeed[0] + selectedSpeed[1];
     timeOut.current = setTimeout(() => {
       setMessages((data) => {
         return [generateNewMessage(), ...data];
       });
-      generateNewData()
+      generateNewData();
     }, timer);
   };
 
   useEffect(() => {
-    generateNewData()
-  }, [speed])
+    generateNewData();
+  }, [speed]);
 
   return (
     <View style={{ flex: 1, paddingTop: top }}>
@@ -99,11 +96,7 @@ export default function IncomingMessages() {
             setSpeed(event.nativeEvent.value as keyof typeof chatSpeed);
           }}
         />
-        <Link asChild href={{pathname: '/'}}>
-        <TouchableOpacity style={{paddingTop: 16}}>
-            <ThemedText>Go back</ThemedText>
-        </TouchableOpacity>
-        </Link>
+        <GoBackButton style={{ paddingTop: 16 }} />
       </View>
     </View>
   );

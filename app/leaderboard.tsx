@@ -1,7 +1,6 @@
+import GoBackButton from "@/components/GoBackButton";
 import Place from "@/components/leaderboard/Place";
-import { ThemedText } from "@/components/ThemedText";
-import { Link } from "expo-router";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 import { useSharedValue } from "react-native-reanimated";
 
 export interface User {
@@ -51,12 +50,7 @@ export default function LeaderBoard() {
           />
         ))}
       </View>
-      {/* TO DO: make this button part of the animation */}
-      <Link asChild href={"/"}>
-      <TouchableOpacity style={{paddingTop: 32}}>
-        <ThemedText>Go back</ThemedText>
-      </TouchableOpacity>
-      </Link>
+      <GoBackButton style={{paddingTop: 24}} />
     </View>
   );
 }

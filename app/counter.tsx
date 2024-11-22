@@ -1,8 +1,7 @@
 import Ticker from "@/components/counter/Ticker";
-import { ThemedText } from "@/components/ThemedText";
-import { Link } from "expo-router";
+import GoBackButton from "@/components/GoBackButton";
 import { useState } from "react";
-import { Button, TouchableOpacity, View } from "react-native";
+import { Button, View } from "react-native";
 
 export default function Counter() {
   const [value, setValue] = useState(12345);
@@ -14,11 +13,7 @@ export default function Counter() {
         title="Change numbers"
         onPress={() => setValue(Math.floor(Math.random() * 100000))}
       />
-      <Link asChild href={{ pathname: "/" }}>
-        <TouchableOpacity style={{ paddingTop: 48 }}>
-          <ThemedText>Go back</ThemedText>
-        </TouchableOpacity>
-      </Link>
+      <GoBackButton style={{ paddingTop: 24 }} />
     </View>
   );
 }
