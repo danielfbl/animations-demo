@@ -30,6 +30,7 @@ export default function Home() {
           href={{ pathname: "/counter" }}
         />
         <HomeItem title="Animated Tabs" href={{ pathname: "/animatedTabs" }} />
+        <HomeItem title="Pagination Dots" href={{ pathname: "/onboarding" }} />
       </ThemedView>
     </ThemedView>
   );
