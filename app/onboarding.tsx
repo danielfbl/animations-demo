@@ -1,3 +1,4 @@
+import GoBackButton from "@/components/GoBackButton";
 import Onboarding from "@/components/onboarding/Onboarding";
 import { useState } from "react";
 import { StyleSheet, View } from "react-native";
@@ -11,6 +12,9 @@ export default function OnboardingScreen() {
         selectedIndex={selectedIndex}
         onIndexChange={(index) => setSelectedIndex(index)}
       />
+      <View style={{ paddingTop: 24, alignItems: "center" }}>
+        <GoBackButton />
+      </View>
     </View>
   );
 }

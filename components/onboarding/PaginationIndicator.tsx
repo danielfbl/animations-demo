@@ -20,7 +20,7 @@ export default function PaginationIndicator({
     <Animated.View
       style={[
         {
-          backgroundColor: "pink",
+          backgroundColor: "#29be56",
           position: "absolute",
           left: 0,
           top: 0,
