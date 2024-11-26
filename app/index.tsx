@@ -31,7 +31,8 @@ export default function Home() {
         />
         <HomeItem title="Animated Tabs" href={{ pathname: "/animatedTabs" }} />
         <HomeItem title="Pagination Dots" href={{ pathname: "/onboarding" }} />
-        <HomeItem title="Wallpaper Carousel" href={{ pathname: "/carousel" }} />
+        <HomeItem title="Availability" href={{ pathname: "/availability"}} />
+        <HomeItem style={{color: 'red'}} title="Wallpaper Carousel" href={{ pathname: "/carousel" }} />
       </ThemedView>
     </ThemedView>
   );
