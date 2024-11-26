@@ -18,19 +18,20 @@ export default function Home() {
       <ThemedText type="title">Animations</ThemedText>
       <ThemedView style={{ paddingTop: 24, alignItems: "center", gap: 4 }}>
         <HomeItem
-          title="Leaderboard Animation"
+          title="Leaderboard"
           href={{ pathname: "/leaderboard" }}
         />
         <HomeItem
-          title="Incoming Messages Animation"
+          title="Incoming Messages"
           href={{ pathname: "/incomingMessages" }}
         />
         <HomeItem
-          title="Counter Animation with Moti"
+          title="Counter"
           href={{ pathname: "/counter" }}
         />
         <HomeItem title="Animated Tabs" href={{ pathname: "/animatedTabs" }} />
         <HomeItem title="Pagination Dots" href={{ pathname: "/onboarding" }} />
+        <HomeItem title="Wallpaper Carousel" href={{ pathname: "/carousel" }} />
       </ThemedView>
     </ThemedView>
   );

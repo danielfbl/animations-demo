@@ -11,6 +11,9 @@ import "react-native-reanimated";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 
 import { useColorScheme } from "@/hooks/useColorScheme";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+
+const queryClient = new QueryClient();
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
@@ -34,18 +37,24 @@ export default function RootLayout() {
   return (
     <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
       <SafeAreaProvider>
-        <Stack>
-          <Stack.Screen name="index" options={{ headerShown: false }} />
-          <Stack.Screen name="leaderboard" options={{ headerShown: false }} />
-          <Stack.Screen name="animatedTabs" options={{ headerShown: false }} />
-          <Stack.Screen
-            name="incomingMessages"
-            options={{ headerShown: false }}
-          />
-          <Stack.Screen name="counter" options={{ headerShown: false }} />
-          <Stack.Screen name="onboarding" options={{ headerShown: false }} />
-          <Stack.Screen name="+not-found" />
-        </Stack>
+        <QueryClientProvider client={queryClient}>
+          <Stack>
+            <Stack.Screen name="index" options={{ headerShown: false }} />
+            <Stack.Screen name="leaderboard" options={{ headerShown: false }} />
+            <Stack.Screen
+              name="animatedTabs"
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="incomingMessages"
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen name="counter" options={{ headerShown: false }} />
+            <Stack.Screen name="onboarding" options={{ headerShown: false }} />
+            <Stack.Screen name="carousel" options={{ headerShown: false }} />
+            <Stack.Screen name="+not-found" />
+          </Stack>
+        </QueryClientProvider>
       </SafeAreaProvider>
     </ThemeProvider>
   );
